@@ -1,0 +1,30 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:18
+    environment:
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'data_trips'
+    ports:
+      - '5432:5432'
+    volumes:
+      - data_trips:/var/lib/postgresql
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+    ports:
+      - "8085:80"
+    volumes:
+      - vol-pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  data_trips:
+    name: data_trips
+  vol-pgadmin_data:
+    name: vol-pgadmin_data
